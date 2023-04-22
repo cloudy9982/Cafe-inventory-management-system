@@ -58,6 +58,7 @@ def member_info_show():
                           "Member_ID", 'Name', "Unit", "Occupation"])
     concat_df = pd.concat([tmp_df.drop(["Occupation"], axis=1), pd.get_dummies(
         tmp_df["Occupation"])], axis=1).groupby(["Member_ID", "Name", "Unit"]).sum().astype('bool').reset_index()
+    # 轉換型態（list）：[{column(列名) : value(值)}…{column:value}];
     results = concat_df.to_dict(orient="records")
 
     # Close connection
@@ -65,12 +66,12 @@ def member_info_show():
 
     return render_template('member_info.html',
                            page_header="list members info",
-                           total_pages=total_pages,
+                           total_pages=total_pages,  # 頁數
                            outputs=results,
                            page=page)
 
 
-@member_app.route('/edit_info', methods=["GET", "POST"])
+@ member_app.route('/edit_info', methods=["GET", "POST"])
 def member_edit_info():
 
     if request.method == "POST":
@@ -131,7 +132,7 @@ def member_edit_info():
                                page_header="edit member info", id_list=id_list)
 
 
-@member_app.route('/register', methods=["GET", "POST"])
+@ member_app.route('/register', methods=["GET", "POST"])
 def member_register():
 
     if request.method == "POST":
