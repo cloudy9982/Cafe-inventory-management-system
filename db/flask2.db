@@ -1,0 +1,26 @@
+CREATE DATABASE `flask_database`;
+SHOW DATABASES;
+USE `flask_database2`;
+
+CREATE TABLE `item`(
+`item_id` INT PRIMARY KEY AUTO_INCREMENT,
+`item_name` VARCHAR(20) UNIQUE,
+`price` INT NOT NULL,
+`unit` VARCHAR(10) NOT NULL,
+`tag_id` INT ,
+ FOREIGN KEY (`tag_id`) REFERENCES  `tag`(`tag_id`) ON DELETE SET NULL
+);
+
+drop TABLE `item`;
+
+CREATE TABLE `tag`(
+`tag_id` INT PRIMARY KEY AUTO_INCREMENT,
+`tag_name` VARCHAR(20) UNIQUE
+);
+
+select * FROM `item`;
+
+select * FROM `tag`;
+INSERT INTO `item` (`item_name`,`price`,`unit`,`tag_id`)VALUES("青椒", 50,"顆", 1);
+INSERT INTO `tag` (`tag_name`)VALUES("蔬菜");
+
